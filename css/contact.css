@@ -1,0 +1,88 @@
+/* contact.css */
+
+/* General styles */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fb;
+    margin: 0;
+    padding: 0;
+     background: linear-gradient(135deg, #e0e7ff 0%, #f5f7fa 100%);
+}
+
+
+/* Contact container */
+.contact-container {
+    background: #fff;
+    max-width: 500px;
+    margin: 3rem auto 2rem auto;
+    padding: 2.5rem 2rem 2rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(44, 62, 80, 0.08);
+}
+
+.contact-container h1 {
+    text-align: center;
+    color: #2d3e50;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    letter-spacing: 1px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+label {
+    font-weight: 500;
+    color: #2d3e50;
+    margin-bottom: 0.3rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+    padding: 0.7rem 1rem;
+    border: 1px solid #dbe2ea;
+    border-radius: 6px;
+    font-size: 1rem;
+    background: #f4f7fa;
+    transition: border 0.2s;
+}
+
+input:focus,
+textarea:focus {
+    border: 1.5px solid #ffb347;
+    outline: none;
+    background: #fffbe9;
+}
+
+button[type="submit"] {
+    background: #ffb347;
+    color: #fff;
+    border: none;
+    padding: 0.9rem 0;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 0.5rem;
+}
+
+button[type="submit"]:hover {
+    background: #ff9800;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .contact-container {
+        padding: 1.2rem 0.7rem;
+        margin: 1.5rem 0.5rem;
+    }
+    .nav ul li {
+        margin-right: 1rem;
+    }
+}

@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 body{
-    background-color: lightgray;
+     background: linear-gradient(135deg, #e0e7ff 0%, #f5f7fa 100%);
+    font-family: 'Segoe UI', Arial, sans-serif;
 }
 .navbar{
     margin-top: 30px;
