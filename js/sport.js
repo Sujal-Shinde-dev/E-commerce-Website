@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
         sportContainer.innerHTML = sportList.map(product => `
             <div class="product-item">
                 <img src="${product.image}" alt="${product.name}">
-                <h2>${product.name}</h2>
+                <h2 class="product-name">${product.name}</h2>
                 <p>${product.desc}</p>
                 <span class="price">Price: $${product.price}</span>
                 <button class="purchase-btn" product-name="${product.name}" product-price="${product.price}">Add to Cart</button>
@@ -42,6 +42,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 price: this.getAttribute('product-price')
             });
             console.log(sportProducts); // Log sport products after adding a new item
+        });
+    }
+});
+document.getElementById('search-button').addEventListener('click', function() {
+    const searchInput = document.getElementById('search-input').value.toLowerCase();
+    const cards = document.querySelectorAll('.product-item');
+    cards.forEach(card => {
+        const productName = card.querySelector('.product-name').textContent.toLowerCase(); 
+        if (productName.includes(searchInput)) {
+            card.style.display = 'flex';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+});
+//CODE TO DISPLAY ALL THE PRODUCTS WHEN SEARCH INPUT IS EMPTY
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            if (this.value === '') {
+                const cards = document.querySelectorAll('.product-item');
+                cards.forEach(card => {
+                    card.style.display = 'flex';
+                });
+            }
         });
     }
 });

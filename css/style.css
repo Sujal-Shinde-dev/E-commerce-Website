@@ -35,6 +35,29 @@ body{
     transition: background-color 0.3s, color 0.3s;
     padding: 10px 10px;
 }
+
+.item-search {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+.item-search input {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+.item-search #search-button{
+    padding: 10px 15px;
+    margin-left: 10px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
 .hero{
     display: flex;
     justify-content: center;

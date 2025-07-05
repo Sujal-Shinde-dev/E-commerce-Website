@@ -92,4 +92,28 @@ document.addEventListener('DOMContentLoaded',   function() {
     }
 }
 );
-    
+document.getElementById('search-button').addEventListener('click', function() {
+    const searchInput = document.getElementById('search-input').value.toLowerCase();
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        const productName = card.querySelector('.product-name').textContent.toLowerCase();
+        if (productName.includes(searchInput)) {
+            card.style.display = 'flex';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+});
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            if (this.value === '') {
+                const cards = document.querySelectorAll('.card');
+                cards.forEach(card => {
+                    card.style.display = 'flex';
+                });
+            }
+        });
+    }
+});
