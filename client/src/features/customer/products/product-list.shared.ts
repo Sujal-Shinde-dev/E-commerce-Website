@@ -43,6 +43,7 @@ export type CustomerProductFilters = {
   brand: string;
   color: string;
   size: string;
+  q?: string;
 };
 
 export type ActiveFilterBadge = {

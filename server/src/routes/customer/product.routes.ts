@@ -4,6 +4,7 @@ import { Category } from "../../models/Category";
 import { ok } from "../../utils/envelope";
 import { Product } from "../../models/Product";
 import { requireFound } from "../../utils/helpers";
+import { hf } from "../../utils/hf";
 
 export const customerProductRouter = Router();
 
@@ -25,6 +26,52 @@ customerProductRouter.get(
 
     res.json(ok(categories));
   }),
+);
+
+customerProductRouter.get(
+  "/products/search",
+  asyncHandler(async (req: Request, res: Response) => {
+    const query = req.query.q as string;
+    if (!query) {
+      res.json(ok([]));
+      return;
+    }
+
+    // 1. Convert the query into an embedding
+    const queryEmbedding = await hf.featureExtraction({
+      model: "sentence-transformers/all-MiniLM-L6-v2",
+      inputs: query,
+    });
+
+    // 2. Perform Vector Search in MongoDB Atlas (using the $search mapping format)
+    const products = await Product.aggregate([
+      {
+        $search: {
+          index: "vector_index", 
+          knnBeta: {
+            vector: queryEmbedding as number[],
+            path: "embedding",
+            k: 10
+          }
+        },
+      },
+      {
+        $match: {
+          status: "active",
+        },
+      },
+      {
+        $project: {
+          embedding: 0, // Exclude the embedding from the response
+        },
+      },
+    ]);
+    
+    // We optionally populate category since aggregate doesn't populate by default
+    const populatedProducts = await Product.populate(products, { path: "category", select: "name" });
+
+    res.json(ok(populatedProducts));
+  })
 );
 
 customerProductRouter.get(

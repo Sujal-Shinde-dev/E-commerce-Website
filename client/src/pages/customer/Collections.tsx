@@ -1,6 +1,7 @@
 import { Commonloader } from "@/components/common/Loader";
 import CustomerFiltersPanel from "@/components/customer/products/customer-filters-panel";
 import CustomerProductCard from "@/components/customer/products/customer-product-card";
+import { AiSearchBar } from "@/components/customer/ai-search-bar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -132,6 +133,8 @@ function Collections() {
 
       <div className={contentContainerClass}>
         <div className={topBarClass}>
+          <AiSearchBar />
+          
           <div className={activeBadgesWrapClass}>
             {activeFilterBadges.map((item) => (
               <Badge key={item.key} className={activeBadgeClass}>

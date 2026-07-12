@@ -22,6 +22,7 @@ export type Product = {
   salePercentage: number;
   status: ProductStatus;
   createdBy: Types.ObjectId;
+  embedding?: number[];
   createdAt: Date;
   updatedAt: Date;
 };
@@ -107,6 +108,10 @@ const ProductSchema = new mongoose.Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
+    },
+    embedding: {
+      type: [Number],
+      select: false,
     },
   },
   { timestamps: true },

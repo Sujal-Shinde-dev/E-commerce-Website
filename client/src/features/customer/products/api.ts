@@ -47,3 +47,9 @@ export async function getCustomerProductDetails(productId: string) {
     `/customer/products/${productId}`,
   );
 }
+
+export async function searchProducts(query: string) {
+  return apiGet<CustomerProduct[]>(
+    `/customer/products/search?q=${encodeURIComponent(query)}`
+  );
+}

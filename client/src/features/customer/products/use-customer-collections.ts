@@ -11,7 +11,7 @@ import type {
   CustomerProductFilters,
   FacetKey,
 } from "./product-list.shared";
-import { getCustomerCategories, getCustomerProducts } from "./api";
+import { getCustomerCategories, getCustomerProducts, searchProducts } from "./api";
 
 export function useCustomerProductList() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -28,6 +28,7 @@ export function useCustomerProductList() {
       brand: searchParams.get("brand") || "",
       color: searchParams.get("color") || "",
       size: searchParams.get("size") || "",
+      q: searchParams.get("q") || "",
     }),
     [searchParams],
   );
@@ -41,6 +42,7 @@ export function useCustomerProductList() {
       color: filters.color || undefined,
       sort,
       size: filters.size || undefined,
+      q: filters.q || undefined,
     }),
     [filters, sort],
   );
@@ -58,11 +60,16 @@ export function useCustomerProductList() {
     }
   }
 
-  async function loadProducts(params: GetCustomerProductsParams) {
+  async function loadProducts(params: GetCustomerProductsParams & { q?: string }) {
     setLoading(true);
 
     try {
-      const data = await getCustomerProducts(params);
+      let data;
+      if (params.q) {
+        data = await searchProducts(params.q);
+      } else {
+        data = await getCustomerProducts(params);
+      }
       setProducts(data ?? []);
     } finally {
       setLoading(false);
@@ -115,6 +122,7 @@ export function useCustomerProductList() {
     nextValue.delete("brand");
     nextValue.delete("size");
     nextValue.delete("color");
+    nextValue.delete("q");
     updateParams(nextValue);
   };
 

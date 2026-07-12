@@ -14,9 +14,10 @@
   "type": "commonjs",
   "dependencies": {
     "@clerk/express": "^2.0.6",
+    "@huggingface/inference": "^4.13.23",
     "cloudinary": "^2.9.0",
     "cors": "^2.8.6",
-    "dotenv": "^17.3.1",
+    "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "mongoose": "^9.3.1",
     "morgan": "^1.10.1",
